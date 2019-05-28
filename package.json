@@ -1,0 +1,29 @@
+{
+  "name": "square-quotes",
+  "version": "0.0.0",
+  "description": "Allow use of square brackets as if they were JS quotes",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx standard && npx tap --cov test*.js test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandhawke/square-quotes.git"
+  },
+  "keywords": [
+    "sandhawke"
+  ],
+  "author": "Sandro Hawke (http://hawke.org/sandro)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sandhawke/square-quotes/issues"
+  },
+  "homepage": "https://github.com/sandhawke/square-quotes#readme",
+  "devDependencies": {
+    "tape": "^4.9.1"
+  },
+  "dependencies": {
+    "debug": "^4.1.0",
+    "xregexp": "^4.2.4"
+  }
+}
