@@ -136,3 +136,13 @@ test('wrap', t => {
 
   t.end()
 })
+
+test('string escapes', t => {
+  let args = []
+  function f (x) { args.push(x); return 'X' }
+
+  t.equal(convert(`a"hello\n\t\r\\"..."b`, f), `aXb`)
+  t.deepEqual(args, ['"hello\n\t\r\\"..."'])
+
+  t.end()
+})

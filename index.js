@@ -3,8 +3,8 @@ const [balancedPattern, bothPattern] = makeRE()
 
 // console.log({bothPattern})
 
-function convert (s) {
-  s = s.replace(bothPattern, requote)
+function convert (s, rewrite = requote) {
+  s = s.replace(bothPattern, rewrite)
   return s
 }
 
@@ -61,8 +61,7 @@ function makeRE (maxNesting = 10) {
        "
        (?: 
            [^"\\\\] | 
-           (?: \\\\ ") | 
-           (?: \\\\ \\\\)
+           (?: \\\\ .) |
        )*
        "
     )
