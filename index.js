@@ -14,6 +14,7 @@ function quote (...args) {
     let s = m.square
     s = s.replace(/\\/g, `\\\\`)
     s = s.replace(/"/g, `\\"`)
+    s = s.replace(/\n/g, `\\n`)
     result = '"' + s + '"'
   }
   // console.log('quote returning', result)

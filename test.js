@@ -13,6 +13,13 @@ test('basic', t => {
   t.end()
 })
 
+test('newlines', t => {
+  t.equal(convert(`[
+]`), `"\\n"`)
+
+  t.end()
+})
+
 test('avoid content in quotes', t => {
   t.equal(convert(`"[]"`), `"[]"`)
   t.equal(convert(`"[]""[]"`), `"[]""[]"`)
