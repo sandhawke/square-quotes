@@ -4,7 +4,7 @@ const test = require('tape')
 const convert = sq.convert
 
 test('re both', t => {
-  const [bal, both] = sq.makeRE(1)
+  const both = sq.makeRE(1)[1]
 
   // console.log({bal, both})
 
@@ -22,7 +22,7 @@ test('re both', t => {
 test('re bal', t => {
   let bal = sq.makeRE(2)[0]
 
-  //t.assert('""'.match(bal))
+  // t.assert('""'.match(bal))
   t.assert('[]'.match(bal))
   // t.assert('x'.match(bal))
   t.assert('x[]'.match(bal))
@@ -33,7 +33,7 @@ test('re bal', t => {
   t.equal('['.replace(bal, 'X'), '[')
   t.equal(']'.replace(bal, 'X'), ']')
   t.equal('[]'.replace(bal, 'X'), 'X')
-  
+
   t.end()
 })
 
@@ -46,8 +46,8 @@ test('re nesting', t => {
 
   bal = sq.makeRE(2)[0]
   t.equal('[x]'.replace(bal, 'X'), 'X')
-  t.equal('[[x]]'.replace(bal, 'X'), 'X') 
-  t.equal('[[[x]]]'.replace(bal, 'X'),  '[X]')  // beyond makeRE(2)
+  t.equal('[[x]]'.replace(bal, 'X'), 'X')
+  t.equal('[[[x]]]'.replace(bal, 'X'), '[X]') // beyond makeRE(2)
 
   bal = sq.makeRE(20)[0]
   // 20 of each
@@ -61,7 +61,7 @@ test('re nesting', t => {
 
   // if you get up around 500 you might get errors like Regular
   // exression too large, after some seconds of churning.
-  
+
   t.end()
 })
 
@@ -120,11 +120,19 @@ test('safe', t => {
   t.end()
 })
 
-test('big==slow!', t=> {
+test('big==slow!', t => {
   // was bug https://twitter.com/sandhawke/status/1133768561644769282
   t.equal(convert(`[             [  ]]`), `"             [  ]"`)
   t.equal(convert(`[                            []]`),
-          `"                            []"`)
-  
+    `"                            []"`)
+
+  t.end()
+})
+
+test('wrap', t => {
+  t.equal(sq.wrap('"hello!"'), '["hello!"]')
+  t.equal(sq.wrap('[a]'), '[[a]]')
+  t.equal(sq.wrap('[a"'), '"[a\\""')
+
   t.end()
 })

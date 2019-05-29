@@ -23,8 +23,8 @@ function wrap (s) {
 
 function wrapInQuotes (s) {
   s = s.replace(/\\/g, `\\\\`) // replace a \ with a \\ (despite appearances)
-  s = s.replace(/"/g, `\\"`)   // prefix any embedded quotes with \
-  s = s.replace(/\n/g, `\\n`)  // turn any real newlines into \n
+  s = s.replace(/"/g, `\\"`) // prefix any embedded quotes with \
+  s = s.replace(/\n/g, `\\n`) // turn any real newlines into \n
   const result = '"' + s + '"'
   return result
 }
@@ -49,7 +49,6 @@ function requote (text, ...args) {
 // I believe the cost of raising maxNesting is small and linear, in
 // memory for storing the regexp and initializing it. Let's confirm.
 function makeRE (maxNesting = 10) {
-  
   // Remember in strings, unlike RE notation, we need to escape
   // backslashes.  So an RE-escaped leftbracket is written as '\\['
   // and a literal backslash character in the data will be matched by
@@ -73,7 +72,6 @@ function makeRE (maxNesting = 10) {
 
   nest[0] = ''
 
-
   // build up nested versions, like
   // nest[1]: Hello, [World],
   // nest[2]: [Hello, [World]]
@@ -85,7 +83,7 @@ function makeRE (maxNesting = 10) {
           (?:
              [^ [ \\] ]
           |
-             ${nest[i-1]}
+             ${nest[i - 1]}
           )*
         \\]
       )
@@ -101,10 +99,9 @@ function makeRE (maxNesting = 10) {
 
   // console.log({strippedBalanced, strippedBoth})
   // console.log(JSON.stringify({strippedBalanced, strippedBoth}))
-  
+
   return [new RegExp(strippedBalanced, 'g'),
-          new RegExp(strippedBoth, 'g')]
+    new RegExp(strippedBoth, 'g')]
 }
 
 module.exports = { convert, safeInBrackets, wrap, makeRE }
-

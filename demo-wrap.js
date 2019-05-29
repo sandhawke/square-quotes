@@ -8,6 +8,3 @@ console.log(sq.wrap('[a]'))
 
 console.log(sq.wrap('[a"'))
 // => "[a\""   fall back to normal quotes if necessary
-
-
-
