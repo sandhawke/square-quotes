@@ -119,3 +119,12 @@ test('safe', t => {
 
   t.end()
 })
+
+test('big==slow!', t=> {
+  // was bug https://twitter.com/sandhawke/status/1133768561644769282
+  t.equal(convert(`[             [  ]]`), `"             [  ]"`)
+  t.equal(convert(`[                            []]`),
+          `"                            []"`)
+  
+  t.end()
+})

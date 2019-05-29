@@ -1,6 +1,8 @@
 
 const [balancedPattern, bothPattern] = makeRE()
 
+// console.log({bothPattern})
+
 function convert (s) {
   s = s.replace(bothPattern, requote)
   return s
@@ -58,19 +60,19 @@ function makeRE (maxNesting = 10) {
   const dq = `
     (?<dq>
        "
-       (?: [^"\\\\] | (?: \\") | \\\\ )*
+       (?: 
+           [^"\\\\] | 
+           (?: \\\\ ") | 
+           (?: \\\\ \\\\)
+       )*
        "
     )
   `
 
   const nest = []
 
-  // match any bracket-free text, like: hello.
-  nest[0] = `
-    (?:
-          [^ [ \\] ]*
-    )
-  `
+  nest[0] = ''
+
 
   // build up nested versions, like
   // nest[1]: Hello, [World],
@@ -81,7 +83,7 @@ function makeRE (maxNesting = 10) {
       (?: 
         \\[
           (?:
-             ${nest[0]}
+             [^ [ \\] ]
           |
              ${nest[i-1]}
           )*

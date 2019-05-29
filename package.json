@@ -1,8 +1,9 @@
 {
   "name": "square-quotes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Allow use of square brackets as if they were JS quotes",
   "main": "index.js",
+  "bin": "convert-from-square-quotes",
   "scripts": {
     "test": "npx standard && npx tap --cov test*.js test/*.js"
   },
@@ -21,9 +22,5 @@
   "homepage": "https://github.com/sandhawke/square-quotes#readme",
   "devDependencies": {
     "tape": "^4.9.1"
-  },
-  "dependencies": {
-    "debug": "^4.1.0",
-    "xregexp": "^4.2.4"
   }
 }
