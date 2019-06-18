@@ -31,10 +31,8 @@ function wrapInQuotes (s) {
 
 function requote (text, ...args) {
   let result
-  const m = args[args.length - 1]
-  // console.log('requote function %o', m)
-  if (m.dq) {
-    console.assert(text.startsWith('"'))
+  // console.log('requote function', JSON.stringify(args, null, 2))
+  if (text.startsWith('"')) {
     console.assert(text.endsWith('"'))
     result = text
   } else {
@@ -55,9 +53,10 @@ function makeRE (maxNesting = 10) {
   // \\\\
 
   // match a double-quoted string, like "hello" or "Hello, \"World\""
-  // and return value, including the quotes, in group named "dq"
+  // and return value, including the quotes (used to use a named capture
+  // group here, but we can just look at the first char
   const dq = `
-    (?<dq>
+    (?:
        "
        (?: 
            [^"\\\\] | 
@@ -66,7 +65,7 @@ function makeRE (maxNesting = 10) {
        "
     )
   `
-
+  
   const nest = []
 
   nest[0] = ''
