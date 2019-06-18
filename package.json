@@ -1,6 +1,6 @@
 {
   "name": "square-quotes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Allow use of square brackets as if they were JS quotes",
   "main": "index.js",
   "bin": "convert-from-square-quotes",
